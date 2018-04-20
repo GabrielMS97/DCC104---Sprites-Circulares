@@ -1,9 +1,9 @@
 function Sprite() {
-  this.x = 100;
-  this.y = 100;
+  this.x = 64;
+  this.y = 64;
   this.larg = 20;
   this.alt = 20;
-
+  this.raio = 15;
   this.vx = 0;
   this.vy = 0;
 
@@ -33,18 +33,14 @@ Sprite.prototype.desenhar = function(ctx) {
   }
   ctx.lineWidth = 3;
   ctx.save();
-
-     ctx.beginPath();
-     var x = 64;   // = 128/2 - centraliza o circulo
-     var y = 64;
-     var radius = 20;  //raio do circulo = diametro/2
-     var anticlockwise = true;
-     var startAngle = 0;     //inicia o arco na posição 0 graus (direita)
-     var endAngle = Math.PI*2; //termina o arco na posição 360 graus (volta completa)
-     ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
-     ctx.closePath();
-     ctx.stroke(); //desenha a borda
-     ctx.fill();   //preenche
+  ctx.beginPath();
+  var anticlockwise = true;
+  var startAngle = 0;
+  var endAngle = Math.PI*2;
+  ctx.arc(this.x, this.y, this.raio, startAngle, endAngle, anticlockwise);
+  ctx.closePath();
+  ctx.stroke(); //desenha a borda
+  ctx.fill();   //preenche
   ctx.restore();
   if(this.debug)
   {
@@ -95,12 +91,9 @@ Sprite.prototype.impoeLimites = function (x, y, w, h) {
 }
 
 Sprite.prototype.colidiuCom = function (alvo) {
-  if (alvo.x + alvo.larg < this.x) return false;
-  if (alvo.x > this.x + this.larg) return false;
-  if (alvo.y + alvo.alt < this.y) return false;
-  if (alvo.y > this.y + this.alt) return false;
+  if (this.raio + alvo.raio < (Math.sqrt((Math.pow((this.x - alvo.x),2))Math.pow((this.y - alvo.y),2)))) return true;
 
-  return true;
+  return false;
 
 }
 
