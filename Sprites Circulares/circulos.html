@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Exemplo 04</title>
-    <script src="sprite.js"></script>
+    <script src="spriteCircular.js"></script>
   </head>
   <body>
     <h1>Exemplo 04</h1>
@@ -15,10 +15,9 @@
       var dt = anterior = 0;
       var sprites = [];
       var pc = new Sprite();
-      pc.cdTiro = 0;
       sprites.push(pc);
 
-      for(var e = 0; e < 7; e++) {
+      for(var e = 0; e < 1; e++) {
         var enemy = new Sprite();
         enemy.x = 200-400*Math.random();;
         enemy.y = 100-200*Math.random();;
@@ -37,7 +36,6 @@
         dt = (t - anterior)/1000;
         for (var i = 0; i < sprites.length; i++) {
           sprites[i].moverAng(dt);
-          pc.cdTiro = pc.cdTiro - dt ;
           sprites[i].impoeLimites(0,0, tela.width, tela.height);
           if(i > 0 && i<=3 && pc.imunidade <= 0 && pc.colidiuCom(sprites[i]))
           {

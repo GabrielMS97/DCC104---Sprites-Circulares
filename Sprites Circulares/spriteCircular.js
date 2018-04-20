@@ -9,7 +9,7 @@ function Sprite() {
 
   this.ax = 0;
   this.ay = 0;
-  this.acel = 0.01;
+  this.acel = 0;
 
   this.ang = 0;
   this.vang = 0;
