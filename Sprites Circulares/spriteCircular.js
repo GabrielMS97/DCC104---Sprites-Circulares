@@ -67,24 +67,24 @@ Sprite.prototype.perseguir = function (alvo) {
 }
 
 Sprite.prototype.impoeLimites = function (x, y, w, h) {
-  if(this.x - this.larg/2 < x)
+  if(this.x - this.raio < x)
   {
-    this.x = x + this.larg/2;
+    this.x = x + this.raio;
     this.vx = 0;
   }
-  if(this.x + this.larg/2 > x + w)
+  if(this.x + this.raio > x + w)
   {
-    this.x = x + w - this.larg/2;
+    this.x = x + w - this.raio;
     this.vx = 0;
   }
-  if(this.y - this.alt/2< y)
+  if(this.y - this.raio < y)
   {
-    this.y = y + this.alt/2;
+    this.y = y + this.raio;
     this.vy = 0;
   }
-  if(this.y + this.alt/2 > y + h)
+  if(this.y + this.raio > y + h)
   {
-    this.y = y + h - this.alt/2;
+    this.y = y + h - this.raio;
     this.vy = 0;
   }
 }
