@@ -33,15 +33,18 @@ Sprite.prototype.desenhar = function(ctx) {
   }
   ctx.lineWidth = 3;
   ctx.save();
-  ctx.translate(this.x, this.y);
-  ctx.rotate(this.ang*Math.PI/180);
-  ctx.beginPath();
-  ctx.moveTo(-this.larg/2, -this.alt/2);
-  ctx.lineTo(-this.larg/2, +this.alt/2);
-  ctx.lineTo(+this.larg/2 + 10, 0);
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
+
+     ctx.beginPath();
+     var x = 64;   // = 128/2 - centraliza o circulo
+     var y = 64;
+     var radius = 20;  //raio do circulo = diametro/2
+     var anticlockwise = true;
+     var startAngle = 0;     //inicia o arco na posição 0 graus (direita)
+     var endAngle = Math.PI*2; //termina o arco na posição 360 graus (volta completa)
+     ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+     ctx.closePath();
+     ctx.stroke(); //desenha a borda
+     ctx.fill();   //preenche
   ctx.restore();
   if(this.debug)
   {
