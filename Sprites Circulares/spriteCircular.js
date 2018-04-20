@@ -91,9 +91,9 @@ Sprite.prototype.impoeLimites = function (x, y, w, h) {
 }
 
 Sprite.prototype.colidiuCom = function (alvo) {
-  if (this.raio + alvo.raio < (Math.sqrt((Math.pow((this.x - alvo.x),2))Math.pow((this.y - alvo.y),2)))) return true;
+  if (this.raio + alvo.raio < (Math.sqrt((Math.pow((alvo.x - this.x),2))+Math.pow((alvo.y - this.y),2)))) return false;
 
-  return false;
+  return true;
 
 }
 
