@@ -35,6 +35,7 @@
         dt = (t - anterior)/1000;
         for (var i = 0; i < sprites.length; i++) {
           sprites[i].mover(dt);
+          sprites[i].perseguir(pc);
           sprites[i].impoeLimites(0,0, tela.width, tela.height);
           if(i > 0 && i<=5 && pc.imunidade <= 0 && pc.colidiuCom(sprites[i]))
           {

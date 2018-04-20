@@ -61,9 +61,8 @@ Sprite.prototype.mover = function(dt) {
 }
 
 Sprite.prototype.perseguir = function (alvo) {
-  this.ax = 0.5*(alvo.x - this.x) - 0.3*this.vx;
-  this.ay = 0.5*(alvo.y - this.y) - 0.3*this.vy;
-  if(this.y > alvo.y) this.vy -= 100;
+  this.ax = 2*(alvo.x - this.x) - 0.3*this.vx;
+  this.ay = 2*(alvo.y - this.y) - 0.3*this.vy;
 }
 
 Sprite.prototype.impoeLimites = function (x, y, w, h) {
