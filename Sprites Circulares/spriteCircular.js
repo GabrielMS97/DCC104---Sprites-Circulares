@@ -53,9 +53,8 @@ Sprite.prototype.desenhar = function(ctx) {
 }
 
 Sprite.prototype.mover = function(dt) {
-  this.ang = this.ang + this.vang*dt;
   this.vx = this.vx+ this.ax*dt;
-  this.vy = this.vy+ (G+this.ay)*dt;
+  this.vy = this.vy+ this.ay*dt;
   this.x = this.x + this.vx*dt;
   this.y = this.y + this.vy*dt;
   this.imunidade = this.imunidade - 1*dt;
@@ -95,19 +94,4 @@ Sprite.prototype.colidiuCom = function (alvo) {
 
   return true;
 
-}
-
-Sprite.prototype.moverAng = function(dt) {
-  this.ang = this.ang + this.vang*dt;
-
-  this.ax = this.acel*Math.cos(this.ang*Math.PI/100);
-  this.ay = this.acel*Math.sin(this.ang*Math.PI/100);
-
-  this.vx = this.vx+ this.ax*dt;
-  this.vy = this.vy+ (G+this.ay)*dt;
-
-  this.x = this.x + this.vx*dt;
-  this.y = this.y + this.vy*dt;
-
-  this.imunidade = this.imunidade - 1*dt;
 }
