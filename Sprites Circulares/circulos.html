@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exemplo 04</title>
+    <script src="sprite.js"></script>
+  </head>
+  <body>
+    <h1>Exemplo 04</h1>
+    <canvas id="canvas" width="500" height="400"></canvas>
+    <script type="text/javascript">
+      var tela = document.getElementsByTagName("canvas")[0];
+      var ctx = tela.getContext("2d");
+      var G = 0;
+      var dt = anterior = 0;
+      var sprites = [];
+      var pc = new Sprite();
+      pc.cdTiro = 0;
+      sprites.push(pc);
+
+      for(var e = 0; e < 7; e++) {
+        var enemy = new Sprite();
+        enemy.x = 200-400*Math.random();;
+        enemy.y = 100-200*Math.random();;
+        sprites.push(enemy);
+      }
+
+
+      function limpaTela()
+      {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0,0, tela.width, tela.height);
+      }
+
+      function passo(t)
+      {
+        dt = (t - anterior)/1000;
+        for (var i = 0; i < sprites.length; i++) {
+          sprites[i].moverAng(dt);
+          pc.cdTiro = pc.cdTiro - dt ;
+          sprites[i].impoeLimites(0,0, tela.width, tela.height);
+          if(i > 0 && i<=3 && pc.imunidade <= 0 && pc.colidiuCom(sprites[i]))
+          {
+            pc.cor = "red";
+            pc.x = 0;
+            pc.y = 0;
+            pc.vx = 0;
+            pc.vy = 0;
+            pc.imunidade = 3;
+          }
+          else
+          {
+            pc.cor = "blue";
+          }
+        }
+
+        limpaTela();
+        for (var i = 0; i < sprites.length; i++) {
+          sprites[i].desenhar(ctx);
+        }
+        anterior = t;
+        requestAnimationFrame(passo);
+      }
+
+      requestAnimationFrame(passo);
+
+      addEventListener("keydown", function (e) {
+        switch (e.keyCode) {
+          case 37:
+            pc.vang = -45;
+            break;
+          case 39:
+            pc.vang = 45;
+            break;
+          case 38:
+            pc.acel = 200;
+            break;
+          case 40:
+            pc.acel = -200;
+            break;
+          case 32:
+            var tiro = new Sprite();
+            if(pc.cdTiro <= 0)
+            {
+              tiro.x = pc.x;
+              tiro.y = pc.y;
+              tiro.larg = 5;
+              tiro.h = 5;
+              tiro.ang = pc.ang;
+              tiro.cor = "red";
+              tiro.acel = 500;
+              sprites.push(tiro);
+              pc.cdTiro = 1;
+            }
+            break;
+          default:
+        }
+      });
+
+        addEventListener("keyup", function (e) {
+          switch (e.keyCode) {
+            case 37:
+            case 39:
+              pc.vang = 0;
+              break;
+            case 38:
+            case 40:
+              pc.acel = 0;
+              break;
+            default:
+          }
+      });
+    </script>
+  </body>
+</html>
