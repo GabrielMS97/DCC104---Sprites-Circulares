@@ -34,16 +34,19 @@
       {
         dt = (t - anterior)/1000;
         for (var i = 0; i < sprites.length; i++) {
+          if(i>0){
+            sprites[i].perseguir(pc);
+            sprites[i].repulsao(pc);
+          }
           sprites[i].mover(dt);
-          sprites[i].perseguir(pc);
           sprites[i].impoeLimites(0,0, tela.width, tela.height);
           if(i > 0 && i<=5 && pc.imunidade <= 0 && pc.colidiuCom(sprites[i]))
           {
             pc.cor = "red";
-            pc.x = 0;
-            pc.y = 0;
-            pc.vx = 0;
-            pc.vy = 0;
+            //pc.x = 0;
+            //pc.y = 0;
+            //pc.vx = 0;
+            //pc.vy = 0;
             pc.imunidade = 3;
           }
           else

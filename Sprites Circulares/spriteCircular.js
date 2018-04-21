@@ -61,8 +61,8 @@ Sprite.prototype.mover = function(dt) {
 }
 
 Sprite.prototype.perseguir = function (alvo) {
-  this.ax = 2*(alvo.x - this.x) - 0.3*this.vx;
-  this.ay = 2*(alvo.y - this.y) - 0.3*this.vy;
+  this.ax = 20*(alvo.x - this.x)*dt - 1*this.vx*dt;
+  this.ay = 20*(alvo.y - this.y)*dt - 1*this.vy*dt;
 }
 
 Sprite.prototype.impoeLimites = function (x, y, w, h) {
@@ -93,4 +93,13 @@ Sprite.prototype.colidiuCom = function (alvo) {
 
   return true;
 
+}
+
+Sprite.prototype.repulsao = function (alvo) {
+  var dist = (Math.sqrt((Math.pow((alvo.x - this.x),2))+Math.pow((alvo.y - this.y),2)));
+  //if(this.colidiuCom(alvo))
+  {
+    this.vx += 10*(this.x-alvo.x)/Math.pow(dist, 2);
+    this.vy += 10*(this.y-alvo.y)/Math.pow(dist, 2);
+  }
 }
